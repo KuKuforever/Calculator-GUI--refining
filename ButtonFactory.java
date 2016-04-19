@@ -3,14 +3,14 @@ import javax.swing.JButton ;
 
 public class ButtonFactory {
   
-	ButtonFactory() {	}
+	ButtonFactory() { }
 	
 	public static JButton createButton(String label, Color color){
-   JButton newButton   =   null ;
+   	JButton newButton   =   null ;
    
-      newButton = new JButton(label) ;
-      newButton.setBackground(color) ;
+        	newButton = new JButton(label) ;
+       		newButton.setBackground(color) ;
    
-	   return newButton ;
+		return newButton ;
 	}
 }
