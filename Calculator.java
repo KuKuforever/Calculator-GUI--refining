@@ -43,8 +43,8 @@ private int         width                =   DEFAULT_WIDTH ;
       createCalculator() ;
    }
    
-	@Override
-	public void actionPerformed(ActionEvent e){
+   @Override
+   public void actionPerformed(ActionEvent e){
    char buttonValue   =   ' ' ; 
      
       if(e.getSource() == calculatorMenuItem)
@@ -86,14 +86,14 @@ private int         width                =   DEFAULT_WIDTH ;
                         displayText.setText(displayText.getText() + buttonValue) ;
                      break ;
          default :   if (Character.isDigit(buttonValue) || (buttonValue == '.')) {
-                       if ((displayText.getText().indexOf('.') == 0) || Character.isDigit(buttonValue))
-                          displayText.setText( returnDisplayValue(displayText.getText() + buttonValue)) ;
+                        if ((displayText.getText().indexOf('.') == 0) || Character.isDigit(buttonValue))
+                           displayText.setText( returnDisplayValue(displayText.getText() + buttonValue)) ;
                      }
       }
    }
       
-      double calculate(double loperand, double roperand, char operator) {
-      double result = 0.0 ;
+   double calculate(double loperand, double roperand, char operator) {
+   double result = 0.0 ;
       
          switch (operator) {
             case '+': result   =   loperand + roperand ;
@@ -107,14 +107,14 @@ private int         width                =   DEFAULT_WIDTH ;
             default:  throw new IllegalArgumentException("calculate: Illegal operator encountered") ;   
          }
          return result ;
-      }
+   }
     
    private JButton[] createButtons() {
    JButton calculatorButtons[]   =   null ;
 
       calculatorButtons       =   new JButton[BUTTON_COLUMNS * BUTTON_ROWS] ;
 		
-	   calculatorButtons[0]    =    ButtonFactory.createButton("7", Color.LIGHT_GRAY) ;
+      calculatorButtons[0]    =    ButtonFactory.createButton("7", Color.LIGHT_GRAY) ;
       calculatorButtons[1]    =    ButtonFactory.createButton("8", Color.LIGHT_GRAY) ;
       calculatorButtons[2]    =    ButtonFactory.createButton("9", Color.LIGHT_GRAY) ;
       calculatorButtons[3]    =    ButtonFactory.createButton("+", Color.PINK) ;
@@ -156,17 +156,17 @@ private int         width                =   DEFAULT_WIDTH ;
            ((displayText             =   createDisplayText()) != null) &&
            ((calculatorButtonPanel   =   createButtonPanel(calculatorButtons)) != null) ) {
            
-      setTitle(title) ;
-      super.setSize(width,height) ;
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+         setTitle(title) ;
+         super.setSize(width,height) ;
+         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
       
-      contentPane = getContentPane() ;
-      contentPane.setLayout(new FlowLayout()) ;
-      contentPane.add(displayText) ;
-      contentPane.add(calculatorButtonPanel) ;
-      addWindowListener(new WindowHandler()) ;
+         contentPane = getContentPane() ;
+         contentPane.setLayout(new FlowLayout()) ;
+         contentPane.add(displayText) ;
+         contentPane.add(calculatorButtonPanel) ;
+         addWindowListener(new WindowHandler()) ;
       
-      getRootPane().setJMenuBar(createMenu()) ;
+         getRootPane().setJMenuBar(createMenu()) ;
       } else
          throw new IllegalArgumentException("createCalculator: Illegal argument encountered") ;   
    }
@@ -198,122 +198,106 @@ private int         width                =   DEFAULT_WIDTH ;
    }
    
    private JMenuBar createMenu() {
-	
-  		calculatorMenu       =   MenuFactory.createMenu("File") ; 
+      calculatorMenu       =   MenuFactory.createMenu("File") ; 
       calculatorMenuBar    =   MenuFactory.createMenuBar() ;
-		calculatorMenuItem   =   MenuFactory.createMenuItem("Exit") ;
+      calculatorMenuItem   =   MenuFactory.createMenuItem("Exit") ;
       calculatorMenuItem.setMnemonic(KeyEvent.VK_E) ;
       calculatorMenuItem.addActionListener(this) ;
-		calculatorMenu.add(calculatorMenuItem) ;
-		calculatorMenuBar.add(calculatorMenu) ;
+      calculatorMenu.add(calculatorMenuItem) ;
+      calculatorMenuBar.add(calculatorMenu) ;
 
       return calculatorMenuBar ;
    }
    
-	@Override
+   @Override
    public final int getHeight(){
-   
       return height ;
-      
    }
    
-	@Override
+   @Override
    public final int getWidth(){
-   
       return width ;
-      
    }
 	
-	private boolean isValidOperation(char operation) {
-	boolean isValid   =   false ;
+   private boolean isValidOperation(char operation) {
+   boolean isValid   =   false ;
 	
-	   if ( (operation == '+') || (operation == '-') || (operation == '/') || (operation == '*') )
-		   isValid   =   true ;
+      if ( (operation == '+') || (operation == '-') || (operation == '/') || (operation == '*') )
+         isValid   =   true ;
 		
-		return isValid ;
-	}
-	
-	@Override
-	public void keyPressed(KeyEvent e) { }
-	
-	@Override
-	public void keyReleased(KeyEvent e) { }
+      return isValid ;
+   }
 	
    @Override
-	public void keyTyped(KeyEvent e) { }
+   public void keyPressed(KeyEvent e) { }
 	
-	private String returnDisplayValue(String displayThisValue) {
-	DecimalFormat calculatorFormat   =   null ;
-	Double aNumber ;
+   @Override
+   public void keyReleased(KeyEvent e) { }
 	
-	   calculatorFormat   =   new DecimalFormat("#####0.######;-#####0.######") ;
-		displayThisValue   =   calculatorFormat.format( (Double.parseDouble(displayThisValue.replaceAll(",","")))) ;
+   @Override
+   public void keyTyped(KeyEvent e) { }
+	
+   private String returnDisplayValue(String displayThisValue) {
+   DecimalFormat calculatorFormat   =   null ;
+   Double aNumber ;
+	
+      calculatorFormat   =   new DecimalFormat("#####0.######;-#####0.######") ;
+      displayThisValue   =   calculatorFormat.format( (Double.parseDouble(displayThisValue.replaceAll(",","")))) ;
 		
-		return displayThisValue ;
-	}
+      return displayThisValue ;
+   }
 	
-	@Override
-	public void mouseClicked(MouseEvent evt) { }
+   @Override
+   public void mouseClicked(MouseEvent evt) { }
 	
-	@Override
-	public void mousePressed(MouseEvent evt) { }
+   @Override
+   public void mousePressed(MouseEvent evt) { }
 	
-	@Override
-	public void mouseReleased(MouseEvent evt) { }
+   @Override
+   public void mouseReleased(MouseEvent evt) { }
 
    @Override
-	public void mouseEntered(MouseEvent evt) {
-	   
-		if(evt.getComponent() instanceof JButton){
-		   getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)) ;
-			bufferColor   =  evt.getComponent().getForeground() ;
-			evt.getComponent().setForeground(Color.WHITE) ; 
-		}
+   public void mouseEntered(MouseEvent evt) {
+	if(evt.getComponent() instanceof JButton){
+	   getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)) ;
+	   bufferColor   =  evt.getComponent().getForeground() ;
+	   evt.getComponent().setForeground(Color.WHITE) ; 
 	}
+   }
 	
-	@Override
-	public void mouseExited(MouseEvent evt) { 
-	
-	   if(evt.getComponent() instanceof JButton) {
-		   getContentPane().setCursor(Cursor.getDefaultCursor()) ;
-			evt.getComponent().setForeground(bufferColor) ;
-		}
+   @Override
+   public void mouseExited(MouseEvent evt) { 
+	if(evt.getComponent() instanceof JButton) {
+	   getContentPane().setCursor(Cursor.getDefaultCursor()) ;
+	   evt.getComponent().setForeground(bufferColor) ;
 	}
+   }
 
 
    
    public final void setHeight(int newHeightValue){
-   
       if (newHeightValue > 0)
          height   =   newHeightValue ;
-         
    }
    
    @Override
    public void setSize(int newHeightValue, int newWidthValue){
-   
       if((newHeightValue > 0) && (newWidthValue > 0)){
-      
          setHeight(newHeightValue) ;
          setWidth(newWidthValue) ;
          super.setSize(getWidth(), getHeight()) ;
-         
       }
    }
    
    @Override
    public void setTitle(String newTitle){
-      
       if((newTitle != null) && (newTitle.length() > 0)){
-      
          title   =   newTitle ;
          super.setTitle(title) ;
-         
       }
    }
    
    public final void setWidth(int newWidthValue){
-      
       if(newWidthValue > 0)
          width   =   newWidthValue ;
    }
