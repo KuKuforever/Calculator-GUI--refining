@@ -12,50 +12,36 @@ public class MenuFactory extends JMenuBar implements ActionListener {
    private JMenuItem exitItem   =   null ;
    private JMenu     fileMenu   =   null ;
    
-	public MenuFactory() {
-   
+   public MenuFactory() {
       setExitItem(EXIT);
       setFileMenu(FILE);
       add(getFileMenu());
-      
    }
 	
    public void actionPerformed(ActionEvent e){
-   
       if(e.getSource() == exitItem)
-      System.exit(0);
-      
+         System.exit(0);
    }
    
    public final JMenu getFileMenu(){
-   
       return fileMenu ;
-      
    }
    
    public final JMenuItem getExitItem(){
-   
       return exitItem ;
-      
    }
    
    public final void setExitItem(String exit){
-   
       if(exitItem == null){
-      
          exitItem = new JMenuItem(exit);
          exitItem.addActionListener(this);
-         
       }
    }
    
    public final void setFileMenu(String file){
-   
       if(fileMenu == null){
-      
          fileMenu = new JMenu(file);
          fileMenu.add(getExitItem());
-         
       }
    }   
 }
