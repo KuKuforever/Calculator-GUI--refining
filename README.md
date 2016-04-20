@@ -1,2 +1,5 @@
 # Calculator-GUI--refining
-Getting my hands dirty
+
+@Small Java project
+
+@Getting my hands dirty
